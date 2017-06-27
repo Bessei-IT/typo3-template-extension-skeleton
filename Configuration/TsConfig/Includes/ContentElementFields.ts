@@ -15,6 +15,9 @@ TCEFORM.tt_content {
     rowDescription.disabled = 1
     editlock.disabled = 1
     sys_language_uid.disabled = 1
+    frame_class.disabled = 1
+    space_before_class.disabled = 1
+    space_after_class.disabled = 1
 
     # ENABLE subheader
     subheader.disabled = 0

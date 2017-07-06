@@ -135,7 +135,7 @@ module.exports = function (grunt) {
                 tasks: ['sass:dev', 'concat:cssHead']
             },
             js: {
-                files: ['JavaScript/**/.js'],
+                files: ['JavaScript/**/*.js'],
                 tasks: ['concat']
             },
             fonts: {

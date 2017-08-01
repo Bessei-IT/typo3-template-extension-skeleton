@@ -45,5 +45,7 @@ class CleanUp
         // Finally delete the current script
         unlink($rootDir . '/Skel/CleanUp.php');
         rmdir($rootDir . '/Skel');
+
+        // TODO Rename package in composer.json, remove require of "BIT\\Skel\\": "Skel" and postCreateProjectCmd
     }
 }

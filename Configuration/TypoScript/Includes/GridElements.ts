@@ -1,4 +1,4 @@
-#tt_content.gridelements_pi1.20.10.setup {
+#tt_content.gridelements_view.20.10.setup {
 #    GRID_ALIAS < lib.gridelements.defaultGridSetup
 #    GRID_ALIAS {
 #        cObject = FLUIDTEMPLATE

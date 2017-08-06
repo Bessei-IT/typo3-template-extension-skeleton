@@ -1,9 +1,7 @@
-@mixin simpleDropdownNavigationDesktop($backgroundColor,$borderColor) {
-  $mainItemPadding: 0 10px;
-  $arrowIconWidth: 12px;
-  $dropdownAnimationLength: 0.8s;
-  // Delay the slide up so the dropdown does not disappear if the user accidentally moves his mouse off the hover area
-  $slideUpDelay: 0.2s;
+@mixin simpleDropdownNavigationDesktop($background-color,$border-color) {
+  $main-item-padding: 0 10px;
+  $arrow-icon-width: 12px;
+  $animation-length: 0.8s;
 
   // Align items
   .bit-horizontal-navigation {
@@ -17,13 +15,13 @@
     .bit-navigation-link {
       // Fill li
       display: block;
-      padding: $mainItemPadding;
+      padding: $main-item-padding;
       text-decoration: none;
 
       // z-index high than bit-navigation-sub-navigation-wrapper to subitems disappear behind the main item
       position: relative;
       z-index: 20;
-      background-color: $backgroundColor;
+      background-color: $background-color;
     }
 
     &:first-of-type .bit-navigation-link {
@@ -38,7 +36,7 @@
       position: relative;
       display: block;
       z-index: 20;
-      background-color: $backgroundColor;
+      background-color: $background-color;
     }
 
     &.has-children .bit-navigation-item-text {
@@ -46,17 +44,17 @@
       // Add position:relative; so we can position the arrow
       position: relative;
       // Add some spacing between text and arrow
-      padding-right: $arrowIconWidth + ($arrowIconWidth / 2);
+      padding-right: $arrow-icon-width + ($arrow-icon-width / 2);
     }
 
     // Dropdown arrow
     .bit-navigation-arrow {
-      width: $arrowIconWidth;
+      width: $arrow-icon-width;
       position: absolute;
       top: 50%;
       right: 0;
       z-index: 60;
-      transition: transform $dropdownAnimationLength;
+      transition: transform $animation-length;
       transform-origin: 50% 50%;
       transform: translateY(-50%) rotate(0);
     }
@@ -97,12 +95,11 @@
     position: absolute;
     top: 100%;
     left: 0;
-    min-width: 100%;
-    transform: translate3D(0, -100%, 0);
-    background-color: $backgroundColor;
-    transition: transform $dropdownAnimationLength;
-    // Close with delay for better UX
-    transition-delay: $slideUpDelay;
+    // Hide dropdown, disable pointer events
+    opacity: 0;
+    pointer-events: none;
+    background-color: $background-color;
+    transition: opacity $animation-length;
   }
 
   .bit-navigation-main-item:hover {
@@ -111,15 +108,15 @@
       z-index: 15;
     }
     .bit-navigation-sub-navigation {
-      transform: translate3D(0, 0, 0);
-      // Open without delay (Resets $slideUpDelay)
-      transition-delay: 0s;
+      // Show dropdown, activate pointer events
+      opacity: 1;
+      pointer-events: all;
     }
   }
 
   .bit-navigation-sub-navigation .bit-navigation-sub-item {
     box-sizing: border-box;
-    border-bottom: 1px solid $borderColor;
+    border-bottom: 1px solid $border-color;
     .bit-navigation-link {
       padding: 0.3rem 0.5rem;
     }

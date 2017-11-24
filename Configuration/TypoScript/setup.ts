@@ -5,4 +5,5 @@
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/Plugins.ts">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/MetaTags.ts">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/Navigation.ts">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/AnalyticsAndTracking.ts">
 <INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/Page.ts">

@@ -46,6 +46,10 @@ class CleanUp
         // Remove GitHub README
         unlink($rootDir . '/README.md');
 
+        // Remove LICENSE since the full project has probably another license than this skeleton
+        unlink($rootDir . '/LICENSE.md');
+
+
         // Finally delete the current script
         unlink($rootDir . '/Skel/CleanUp.php');
         rmdir($rootDir . '/Skel');

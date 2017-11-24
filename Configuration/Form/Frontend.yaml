@@ -1,0 +1,15 @@
+TYPO3:
+  CMS:
+    Form:
+      prototypes:
+        standard:
+          formElementsDefinition:
+            Form:
+              renderingOptions:
+                templateRootPaths:
+                  110: 'EXT:template/Resources/Private/Fluid/Form/Templates/'
+                partialRootPaths:
+                  100: 'EXT:template/Resources/Private/Fluid/ContentElements/Partials/'
+                  110: 'EXT:template/Resources/Private/Fluid/Form/Partials/'
+                layoutRootPaths:
+                  110: 'EXT:template/Resources/Private/Fluid/Form/Layouts/'

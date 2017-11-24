@@ -13,7 +13,7 @@
       "email": "composer@bessei-it.eu"
     }
   ],
-  "license": "MIT",
+  "license": "proprietary",
   "autoload": {
     "psr-4": {
       "BIT\\Template\\": "Classes"

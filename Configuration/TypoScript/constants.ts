@@ -3,7 +3,7 @@ plugin.tx_template {
         #customsubcategory=page=Page configuration
 
         #cat=plugin.tx_template/page/a; type=string; label= Page absRefPrefix
-        absRefPrefix = /
+        absRefPrefix = auto
 
         #cat=plugin.tx_template/page/b; type=string; label= Default meta keywords
         metaKeywords =

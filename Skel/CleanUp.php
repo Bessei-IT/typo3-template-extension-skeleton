@@ -12,6 +12,7 @@ class CleanUp
     public static function postCreateProjectCmd(Event $event)
     {
         $rootDir = rtrim(dirname(__DIR__, 1), '/');
+        static::replaceComposerJsonWithCleanVersion($rootDir);
         static::deleteUnusedFiles($rootDir);
     }
 
@@ -53,7 +54,10 @@ class CleanUp
         // Finally delete the current script
         unlink($rootDir . '/Skel/CleanUp.php');
         rmdir($rootDir . '/Skel');
+    }
 
-        // TODO Rename package in composer.json, remove require of "BIT\\Skel\\": "Skel" and postCreateProjectCmd
+    protected static function replaceComposerJsonWithCleanVersion(string $rootDir)
+    {
+        rename($rootDir . '/Skel/.composer.json', $rootDir . '/composer.json');
     }
 }

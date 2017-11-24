@@ -1,0 +1,30 @@
+{
+  "name": "bit/template",
+  "description": "TYPO3 template/site-package",
+  "type": "typo3-cms-extension",
+  "keywords": [
+    "TYPO3",
+    "extension",
+    "template"
+  ],
+  "authors": [
+    {
+      "name": "Christoph Bessei",
+      "email": "composer@bessei-it.eu"
+    }
+  ],
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "BIT\\Template\\": "Classes"
+    }
+  },
+  "replace": {
+    "template": "self.version",
+    "typo3-ter/template": "self.version"
+  },
+  "require": {
+  },
+  "scripts": {
+  }
+}

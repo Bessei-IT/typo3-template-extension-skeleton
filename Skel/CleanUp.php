@@ -35,6 +35,10 @@ class CleanUp
         unlink($rootDir . '/Resources/Private/Fluid/ContentElements/Partials/.gitignore');
         unlink($rootDir . '/Resources/Private/Fluid/ContentElements/Templates/.gitignore');
 
+        unlink($rootDir . '/Resources/Private/Fluid/Form/Templates/.gitignore');
+        unlink($rootDir . '/Resources/Private/Fluid/Form/Templates/.gitignore');
+        unlink($rootDir . '/Resources/Private/Fluid/Form/Templates/.gitignore');
+
         unlink($rootDir . '/Resources/Private/Fluid/GridElements/Templates/.gitignore');
 
         unlink($rootDir . '/Resources/Private/Fluid/Pages/Partials/.gitignore');

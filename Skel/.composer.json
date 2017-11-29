@@ -1,6 +1,6 @@
 {
   "name": "bit/template",
-  "description": "TYPO3 template/site-package",
+  "description": "TYPO3 template/site-package extension",
   "type": "typo3-cms-extension",
   "keywords": [
     "TYPO3",

@@ -28,7 +28,7 @@
   },
   "scripts": {
     "post-create-project-cmd": [
-      "BIT\\Skel\\CleanUp::postCreateProjectCmd"
+      "BIT\\Skel\\Composer::postCreateProjectCmd"
     ]
   }
 }

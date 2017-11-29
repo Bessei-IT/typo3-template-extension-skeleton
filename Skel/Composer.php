@@ -7,7 +7,7 @@ namespace BIT\Skel;
 
 use Composer\Script\Event;
 
-class CleanUp
+class Composer
 {
     public static function postCreateProjectCmd(Event $event)
     {
@@ -50,14 +50,37 @@ class CleanUp
         // Remove LICENSE since the full project has probably another license than this skeleton
         unlink($rootDir . '/LICENSE.md');
 
+        // Remove .git directory
+        static::rrmdir($rootDir . '/.git/');
+
+        // Remove .idea directory
+        static::rrmdir($rootDir . '/.idea/');
 
         // Finally delete the current script
-        unlink($rootDir . '/Skel/CleanUp.php');
+        unlink($rootDir . '/Skel/Composer.php');
         rmdir($rootDir . '/Skel');
     }
 
     protected static function replaceComposerJsonWithCleanVersion(string $rootDir)
     {
         rename($rootDir . '/Skel/.composer.json', $rootDir . '/composer.json');
+    }
+
+
+    protected static function rrmdir($dir)
+    {
+        if (is_dir($dir)) {
+            $objects = scandir($dir);
+            foreach ($objects as $object) {
+                if ($object != "." && $object != "..") {
+                    if (is_dir($dir . "/" . $object)) {
+                        static::rrmdir($dir . "/" . $object);
+                    } else {
+                        unlink($dir . "/" . $object);
+                    }
+                }
+            }
+            rmdir($dir);
+        }
     }
 }

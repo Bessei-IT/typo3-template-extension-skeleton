@@ -19,11 +19,18 @@ class Composer
      */
     protected static $io;
 
+    protected static $remoteRepositoryName;
+
+    protected static $branch;
+
 
     public static function postCreateProjectCmd(Event $event)
     {
         static::$event = $event;
         static::$io = $event->getIO();
+
+        static::$remoteRepositoryName = 'origin';
+        static::$branch = 'master';
 
         $rootDir = rtrim(dirname(__DIR__, 1), '/');
         static::addTemplateExtensionToTypo3($rootDir);
@@ -46,13 +53,21 @@ class Composer
                 $output = static::exec($command);
                 static::$io->info('Added repostiory for bit/template', $output);
 
+                // Update git remote for bit/template
+                static::exec(
+                    'cd ' . $rootDir . ' && git remote set-url ' . static::$remoteRepositoryName . ' "' . $templateRepository . '"'
+                );
+
+                // Push template to new repository
+                static::exec('cd ' . $rootDir . ' && add .');
+                static::exec('cd ' . $rootDir . ' && commit -m "Init"');
+                static::exec('cd ' . $rootDir . ' && push -u ' . static::$remoteRepositoryName . ' ' . static::$branch);
+
                 // composer require bit/template:dev-master
-                $command = 'cd ' . $typo3RootDir . ' && ' . $phpBinary . ' ' . $composerBinary . ' require bit/template:dev-master';
+                $command = 'cd ' . $typo3RootDir . ' && ' . $phpBinary . ' ' . $composerBinary . ' require bit/template:dev-' . static::$branch;
                 $output = static::exec($command);
                 static::$io->info('Added dependency bit/template', $output);
 
-                // Update git remote for bit/template
-                static::exec('cd ' . $rootDir . ' && git remote set-url origin "' . $templateRepository . '"');
             } else {
                 static::$io->warning("Couldn't find template repository, do nothing");
             }

@@ -9,11 +9,54 @@ use Composer\Script\Event;
 
 class Composer
 {
+    /**
+     * @var Event
+     */
+    protected static $event;
+
+    /**
+     * @var \Composer\IO\ConsoleIO
+     */
+    protected static $io;
+
+
     public static function postCreateProjectCmd(Event $event)
     {
+        static::$event = $event;
+        static::$io = $event->getIO();
+
         $rootDir = rtrim(dirname(__DIR__, 1), '/');
+        static::addTemplateExtensionToTypo3($rootDir);
         static::replaceComposerJsonWithCleanVersion($rootDir);
         static::deleteUnusedFiles($rootDir);
+    }
+
+    protected static function addTemplateExtensionToTypo3($rootDir)
+    {
+        $typo3RootDir = rtrim(dirname($rootDir, 4), '/');
+        if (is_readable($typo3RootDir . '/composer.json')) {
+            $phpBinary = PHP_BINARY;
+            $composerBinary = trim($_SERVER['SCRIPT_FILENAME']);
+
+            $templateRepository = trim($_SERVER['EXT_TEMPLATE_REPOSITORY'] ?? '');
+            if (!empty($templateRepository)) {
+                // Add repository for bit/template
+                $addRepositoryCommand = 'config repositories.ext-template vcs "' . $templateRepository . '"';
+                $command = 'cd ' . $typo3RootDir . ' && ' . $phpBinary . ' ' . $composerBinary . ' ' . $addRepositoryCommand;
+                $output = static::exec($command);
+                static::$io->info('Added repostiory for bit/template', $output);
+
+                // composer require bit/template:dev-master
+                $command = 'cd ' . $typo3RootDir . ' && ' . $phpBinary . ' ' . $composerBinary . ' require bit/template:dev-master';
+                $output = static::exec($command);
+                static::$io->info('Added dependency bit/template', $output);
+
+                // Update git remote for bit/template
+                static::exec('cd ' . $rootDir . ' && git remote set-url origin "' . $templateRepository . '"');
+            } else {
+                static::$io->warning("Couldn't find template repository, do nothing");
+            }
+        }
     }
 
     /**
@@ -82,5 +125,16 @@ class Composer
             }
             rmdir($dir);
         }
+    }
+
+    protected static function exec($command)
+    {
+        exec($command, $output);
+        static::$io->info('Executed ' . $command);
+        if (!is_array($output)) {
+            $output = [$output];
+        }
+        static::$io->debug('Executed ' . $command . ' Output:', $output);
+        return $output;
     }
 }

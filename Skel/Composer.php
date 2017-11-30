@@ -53,17 +53,25 @@ class Composer
                 $output = static::exec($command);
                 static::$io->info('Added repostiory for bit/template', $output);
 
-                // Update git remote for bit/template
+                // Clear reference to bit/typo3-template-extension-skeleton
+                static::rrmdir($rootDir . '/.git');
+
+                // Init new repository
+                static::exec('cd ' . $rootDir . ' && git init');
+
+                // Set git remote for bit/template
                 static::exec(
-                    'cd ' . $rootDir . ' && git remote set-url ' . static::$remoteRepositoryName . ' "' . $templateRepository . '"'
+                    'cd ' . $rootDir . ' && git git remote add ' . static::$remoteRepositoryName . ' "' . $templateRepository . '"'
                 );
 
-                // Push template to new repository
+                // Push current folder to new repository
                 static::exec('cd ' . $rootDir . ' && git add .');
                 static::exec('cd ' . $rootDir . ' && git commit -m "Init"');
-                static::exec('cd ' . $rootDir . ' && git push -u ' . static::$remoteRepositoryName . ' ' . static::$branch);
+                static::exec(
+                    'cd ' . $rootDir . ' && git push -u ' . static::$remoteRepositoryName . ' ' . static::$branch
+                );
 
-                // composer require bit/template:dev-master
+                // Add bit/template dependency to TYPO3 composer.json
                 $command = 'cd ' . $typo3RootDir . ' && ' . $phpBinary . ' ' . $composerBinary . ' require bit/template:dev-' . static::$branch;
                 $output = static::exec($command);
                 static::$io->info('Added dependency bit/template', $output);
@@ -107,9 +115,6 @@ class Composer
 
         // Remove LICENSE since the full project has probably another license than this skeleton
         static::unlink($rootDir . '/LICENSE.md');
-
-        // Remove .git directory
-        static::rrmdir($rootDir . '/.git/');
 
         // Remove .idea directory
         static::rrmdir($rootDir . '/.idea/');

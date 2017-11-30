@@ -61,7 +61,7 @@ class Composer
 
                 // Set git remote for bit/template
                 static::exec(
-                    'cd ' . $rootDir . ' && git git remote add ' . static::$remoteRepositoryName . ' "' . $templateRepository . '"'
+                    'cd ' . $rootDir . ' && git remote add ' . static::$remoteRepositoryName . ' "' . $templateRepository . '"'
                 );
 
                 // Push current folder to new repository

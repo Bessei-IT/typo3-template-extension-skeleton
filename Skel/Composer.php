@@ -59,9 +59,9 @@ class Composer
                 );
 
                 // Push template to new repository
-                static::exec('cd ' . $rootDir . ' && add .');
-                static::exec('cd ' . $rootDir . ' && commit -m "Init"');
-                static::exec('cd ' . $rootDir . ' && push -u ' . static::$remoteRepositoryName . ' ' . static::$branch);
+                static::exec('cd ' . $rootDir . ' && git add .');
+                static::exec('cd ' . $rootDir . ' && git commit -m "Init"');
+                static::exec('cd ' . $rootDir . ' && git push -u ' . static::$remoteRepositoryName . ' ' . static::$branch);
 
                 // composer require bit/template:dev-master
                 $command = 'cd ' . $typo3RootDir . ' && ' . $phpBinary . ' ' . $composerBinary . ' require bit/template:dev-' . static::$branch;

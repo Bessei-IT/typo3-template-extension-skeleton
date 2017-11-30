@@ -49,33 +49,29 @@ class Composer
             if (!empty($templateRepository)) {
                 // Add repository for bit/template
                 $addRepositoryCommand = 'config repositories.ext-template vcs "' . $templateRepository . '"';
-                $command = 'cd ' . $typo3RootDir . ' && ' . $phpBinary . ' ' . $composerBinary . ' ' . $addRepositoryCommand;
-                $output = static::exec($command);
-                static::$io->info('Added repostiory for bit/template', $output);
+
+                static::exec($phpBinary . ' ' . $composerBinary . ' ' . $addRepositoryCommand, $typo3RootDir);
 
                 // Clear reference to bit/typo3-template-extension-skeleton
                 static::rrmdir($rootDir . '/.git');
 
                 // Init new repository
-                static::exec('cd ' . $rootDir . ' && git init');
+                static::exec('git init', $rootDir);
 
                 // Set git remote for bit/template
                 static::exec(
-                    'cd ' . $rootDir . ' && git remote add ' . static::$remoteRepositoryName . ' "' . $templateRepository . '"'
+                    'git remote add ' . static::$remoteRepositoryName . ' "' . $templateRepository . '"',
+                    $rootDir
                 );
 
                 // Push current folder to new repository
-                static::exec('cd ' . $rootDir . ' && git add .');
-                static::exec('cd ' . $rootDir . ' && git commit -m "Init"');
-                static::exec(
-                    'cd ' . $rootDir . ' && git push -u ' . static::$remoteRepositoryName . ' ' . static::$branch
-                );
+                static::exec('git add .', $rootDir);
+                static::exec('git commit -m "Init"', $rootDir);
+                static::exec('git push -u ' . static::$remoteRepositoryName . ' ' . static::$branch, $rootDir);
 
                 // Add bit/template dependency to TYPO3 composer.json
-                $command = 'cd ' . $typo3RootDir . ' && ' . $phpBinary . ' ' . $composerBinary . ' require bit/template:dev-' . static::$branch;
-                $output = static::exec($command);
-                static::$io->info('Added dependency bit/template', $output);
-
+                $command = $phpBinary . ' ' . $composerBinary . ' require bit/template:dev-' . static::$branch;
+                static::exec($command, $typo3RootDir);
             } else {
                 static::$io->warning("Couldn't find template repository, do nothing");
             }
@@ -147,8 +143,12 @@ class Composer
         }
     }
 
-    protected static function exec($command)
+    protected static function exec($command, $workingDirectory = null)
     {
+        if (!empty($workingDirectory) && file_exists($workingDirectory)) {
+            $command = 'cd ' . $workingDirectory . ' && ' . $command;
+        }
+
         exec($command, $output);
         static::$io->info('Executed ' . $command);
         if (!is_array($output)) {

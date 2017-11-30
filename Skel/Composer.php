@@ -71,27 +71,27 @@ class Composer
     protected static function deleteUnusedFiles(string $rootDir)
     {
         // Delete .gitignore
-        unlink($rootDir . '/Classes/ContentElements/.gitignore');
-        unlink($rootDir . '/Classes/Controller/.gitignore');
-        unlink($rootDir . '/Classes/ViewHelpers/.gitignore');
+        static::unlink($rootDir . '/Classes/ContentElements/.gitignore');
+        static::unlink($rootDir . '/Classes/Controller/.gitignore');
+        static::unlink($rootDir . '/Classes/ViewHelpers/.gitignore');
 
-        unlink($rootDir . '/Resources/Private/Fluid/ContentElements/Layouts/.gitignore');
-        unlink($rootDir . '/Resources/Private/Fluid/ContentElements/Partials/.gitignore');
-        unlink($rootDir . '/Resources/Private/Fluid/ContentElements/Templates/.gitignore');
+        static::unlink($rootDir . '/Resources/Private/Fluid/ContentElements/Layouts/.gitignore');
+        static::unlink($rootDir . '/Resources/Private/Fluid/ContentElements/Partials/.gitignore');
+        static::unlink($rootDir . '/Resources/Private/Fluid/ContentElements/Templates/.gitignore');
 
-        unlink($rootDir . '/Resources/Private/Fluid/Form/Layouts/.gitignore');
-        unlink($rootDir . '/Resources/Private/Fluid/Form/Templates/.gitignore');
-        unlink($rootDir . '/Resources/Private/Fluid/Form/Partials/.gitignore');
+        static::unlink($rootDir . '/Resources/Private/Fluid/Form/Layouts/.gitignore');
+        static::unlink($rootDir . '/Resources/Private/Fluid/Form/Templates/.gitignore');
+        static::unlink($rootDir . '/Resources/Private/Fluid/Form/Partials/.gitignore');
 
-        unlink($rootDir . '/Resources/Private/Fluid/GridElements/Templates/.gitignore');
+        static::unlink($rootDir . '/Resources/Private/Fluid/GridElements/Templates/.gitignore');
 
-        unlink($rootDir . '/Resources/Private/Fluid/Pages/Partials/.gitignore');
+        static::unlink($rootDir . '/Resources/Private/Fluid/Pages/Partials/.gitignore');
 
         // Remove GitHub README
-        unlink($rootDir . '/README.md');
+        static::unlink($rootDir . '/README.md');
 
         // Remove LICENSE since the full project has probably another license than this skeleton
-        unlink($rootDir . '/LICENSE.md');
+        static::unlink($rootDir . '/LICENSE.md');
 
         // Remove .git directory
         static::rrmdir($rootDir . '/.git/');
@@ -100,7 +100,7 @@ class Composer
         static::rrmdir($rootDir . '/.idea/');
 
         // Finally delete the current script
-        unlink($rootDir . '/Skel/Composer.php');
+        static::unlink($rootDir . '/Skel/Composer.php');
         rmdir($rootDir . '/Skel');
     }
 
@@ -136,5 +136,12 @@ class Composer
         }
         static::$io->debug('Executed ' . $command . ' Output:', $output);
         return $output;
+    }
+
+    protected static function unlink($path)
+    {
+        if (file_exists($path)) {
+            unlink($path);
+        }
     }
 }

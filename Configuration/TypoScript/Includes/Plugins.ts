@@ -36,6 +36,22 @@ plugin {
         }
     }
 
+    tx_template {
+        view {
+            templateRootPaths {
+                20 = EXT:template/Resources/Private/Fluid/ContentElements/Templates/
+            }
+
+            partialRootPaths {
+                20 = EXT:template/Resources/Private/Fluid/ContentElements/Partials/
+            }
+
+            layoutRootPaths {
+                20 = EXT:template/Resources/Private/Fluid/ContentElements/Layouts/
+            }
+        }
+    }
+
     tx_form {
         settings {
             yamlConfigurations {

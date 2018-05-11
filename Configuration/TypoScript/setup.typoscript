@@ -1,0 +1,9 @@
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/Config.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/Translations.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/FluidContent.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/GridElements.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/Plugins.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/MetaTags.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/Navigation.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/AnalyticsAndTracking.typoscript">
+<INCLUDE_TYPOSCRIPT: source="FILE:EXT:template/Configuration/TypoScript/Includes/Page.typoscript">

@@ -13,7 +13,7 @@
                             <f:alias map="{id: '{bu:uniqueId()}'}">
                                 <f:comment>Checkbox and label for mobile version</f:comment>
                                 <input type="checkbox" class="bit-navigation-checkbox"
-                                       id="bit-navigation-checkbox-{id}"/>
+                                       id="bit-navigation-checkbox-{id}" autocomplete="off"/>
                                 <label for="bit-navigation-checkbox-{id}"
                                        class="bit-navigation-subitem-label">
                                     <f:render partial="Navigation/Elements/Link" arguments="{item: item}"/>
@@ -56,9 +56,8 @@
 </f:section>
 
 <f:section name="mobileButton">
-
     <f:alias map="{id: '{bu:uniqueId()}'}">
-        <input type="checkbox" class="bit-navigation-checkbox" id="bit-navigation-checkbox-{id}"/>
+        <input type="checkbox" class="bit-navigation-checkbox" id="bit-navigation-checkbox-{id}" autocomplete="off"/>
         <label class="bit-toggle-icon-wrapper" for="bit-navigation-checkbox-{id}">
             <div class="toggle-icon"></div>
         </label>

@@ -41,7 +41,7 @@ tx_gridelements.setup {
                         }
 
                         3 {
-                            name = Center right
+                            name = Right
                             colPos = 345
                         }
                     }
@@ -64,7 +64,7 @@ tx_gridelements.setup {
                         }
 
                         2 {
-                            name = Center
+                            name = Center left
                             colPos = 330
                         }
 

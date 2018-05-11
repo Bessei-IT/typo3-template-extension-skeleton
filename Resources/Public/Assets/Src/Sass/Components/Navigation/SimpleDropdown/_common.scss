@@ -1,6 +1,12 @@
 @mixin simpleDropdownNavigationCommon($backgroundColor) {
   background-color: $backgroundColor;
 
+  .bit-navigation {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
   // Hide toggle checkbox
   .bit-navigation-checkbox {
     opacity: 0;
